@@ -2,14 +2,16 @@ from flask import Flask, render_template
 import pigpio
 import time
 import pigpio
+#local import change if renamed file
 import SDL_Pi_DustSensor
+#
 import random
 import datetime
 import telepot
 from telepot.loop import MessageLoop
-
-aqi = 8.5
-
+#this is an error value
+aqi = 70773
+#this sets the pin for the sensor as pin 17
 SENSORPIN = 17
 
 # import testDust
@@ -20,7 +22,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/main')
-def cakes():
+def main():
     
 
     pi = pigpio.pi() # Connect to Pi.
@@ -38,8 +40,7 @@ def cakes():
         print("Concentration Error\n")
 #          continue
 
-      #print("Air Quality Measurements for PM2.5:")
-      #print("  " + str(int(c)) + " particles/0.01ft^3")
+   
 
       # convert to SI units
     concentration_ugm3=dustSensor.pcs_to_ugm3(c)
@@ -50,7 +51,6 @@ def cakes():
     aqi=dustSensor.ugm3_to_aqi(concentration_ugm3)
       
     print("  Current AQI (not 24 hour avg): " + str(int(aqi)))
-      #print("")
 
     pi.stop() # Disconnect from Pi.
     templateData = {
@@ -82,17 +82,12 @@ def handle(msg):
       # concentration above 1,080,000 considered error
 	if (c>=1080000.00):
 		print("Concentration Error\n")
-#          continue
-
-      #print("Air Quality Measurements for PM2.5:")
-      #print("  " + str(int(c)) + " particles/0.01ft^3")
 
       # convert to SI units
 	concentration_ugm3=dustSensor.pcs_to_ugm3(c)
-   # print("  " + str(int(concentration_ugm3)) + " ugm^3")
       
-      # convert SI units to US AQI
-      # input should be 24 hour average of ugm3, not instantaneous reading
+      # convert SI units (EU) to US AQI {optional you can comment this out}
+      #NOTE: input should be 24 hour average of ugm3, not instantaneous reading
 	aqi=dustSensor.ugm3_to_aqi(concentration_ugm3)
       
 	print("  Current AQI (not 24 hour avg): " + str(int(aqi)))
@@ -100,8 +95,8 @@ def handle(msg):
 
 	pi.stop() # Disconnect from Pi.
 	bot.sendMessage(chat_id, str(int(aqi)))
-
-bot = telepot.Bot('730151918:AAHf5ZiQnERdK_PussBalnoVltGO3O96zqc')
+#make sure to put your api key here
+bot = telepot.Bot('YOURAPIKEY')
 
 MessageLoop(bot, handle).run_as_thread()
 print 'I am listening ...'
