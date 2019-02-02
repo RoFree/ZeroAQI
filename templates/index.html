@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+<h1 id="title">Welcome to ZeroAQI</h1>
+
+<input type:"text" placeholder="Username" id="usernamei"><br>
+<input type:"text" placeholder="Password" id="passwordi"><br>
+<button onClick="submitFun()">Login</button>
+<script>
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+String.prototype.hashCode = function(){
+    var hash = 0;
+    if (this.length == 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        char = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
+function submitFun() {
+	var username = document.getElementById("usernamei").value
+	var password = document.getElementById("passwordi").value
+	var usernamer = username.hashCode()
+	var passwordr = password.hashCode()
+	var cookiestr = passwordr+usernamer
+	document.cookie = "cook="+cookiestr
+	var debug = getCookie("cook")
+	document.getElementById("title").innerHTML = debug;
+	window.location.assign("/main")
+}
+
+</script>
+</body>
+</html>

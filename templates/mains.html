@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+<script>
+String.prototype.hashCode = function(){
+    var hash = 0;
+    if (this.length == 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        char = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+var hash = getCookie("cook")
+
+if (hash == "951272305") {
+
+}
+else {
+history.back()
+}
+</script>
+
+</head>
+
+<body>
+<h1> Welcome to ZeroAQI</h1>
+<h2>This page displays your air quality</h2>
+
+<h3> Your AQI is: {{ aqi }} </h3>
+<h3> This air quality is {{ aqiindex }}</h3>
+<h6> Did you know we have a Telegram Chat Bot!! Use it for a fun user interface with great information</h6>
+</body>
+</html>
