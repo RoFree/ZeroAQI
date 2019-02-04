@@ -66,6 +66,16 @@ def handle(msg):
 
     if command == '/roll':
         bot.sendMessage(chat_id, random.randint(1,6))
+    elif command == '/joke':
+	bot.sendMessage(chat_id,str('Knock Knock'))
+	if command == 'Who is there':
+	    bot.sendMessage(chat_id,str('canoe'))
+	    if command == 'canoe who':
+		bot.sendMessage(chat_id,str('canoe help me with my homework'))
+    elif command == '/usage':
+	bot.sendMessage(chat_id,str('ZeroAQI was meant to be portable, but that does not mean you can take me everywhere.  My electronics hate getting wet, because when they do they stop working.  So, please do not stick me in a lake or put me in the rain as it will not end well.  To take accurate readings I need still air so I will not function well on a windy day unless you shield me.  To take the best readings I also need to be upright, an easy way to check is if the wire connecter is closest to the ground.  Since again my electronics hate getting wet it is advised that I stay indoors when it is humid outside, sorry no waterslides for me.'))
+    elif command == '/about':
+	bot.sendMessage(chat_id,str('ZeroAQI is an affordable, portable air quality sensor for everybody.  All the code is on github with an open source license so anyone can make one.  Since there are no designated parts lists you can find the best prices for your components.  You are welcome to play around with the code and when you create somethimg amazing please commit it to ZeroAQIs github so ZeroAQI can get even better. Please enjoy ZeroAQI'))
     elif command == '/How to improve my AQI':
 	bot.sendMessage(chat_id,str('You can purchase an air filter such as a HEPA air filter.  You could also consider vacumming to reduce dust and improving your ventilation.  If this is an outdoor AQI detector and the AQI is unhealthy you should consider moving indoors'))
     elif command == '/aqi':
