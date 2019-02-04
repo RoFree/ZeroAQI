@@ -42,7 +42,8 @@ function submitFun() {
 	var cookiestr = passwordr+usernamer
 	document.cookie = "cook="+cookiestr
 	var debug = getCookie("cook")
-	document.getElementById("title").innerHTML = debug;
+	///debug script uncomment for debugging help
+	/// document.getElementById("title").innerHTML = debug;
 	window.location.assign("/main")
 }
 
